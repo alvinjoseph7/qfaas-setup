@@ -41,7 +41,7 @@ git clone https://github.com/qfaas-project/hello-retail.git
 cd hello-retail
 ```
 <br/> **NOTE:** The repository has minor edits to be made before using it.
-- Since deployed functions need to be pulled from dockerhub, set dockerhub credentials in your system beforehand.
+- Since deployed functions need to be pulled from dockerhub, set dockerhub credentials in your system beforehand. See [Private Registries](https://docs.openfaas.com/reference/private-registries/) for more info.
   ```
   export DOCKER_USERNAME=<your_docker_username>
   export DOCKER_PASSWORD=<your_docker_password>
