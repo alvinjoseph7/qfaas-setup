@@ -84,13 +84,13 @@ cd faas-netes
 1. Change the 1st line of Dockerfile, from
 ```FROM teamserverless/license-check:0.3.9 as license-check ``` to ```FROM ghcr.io/openfaas/license-check:0.4.2 as license-check ```
 
-1. Now, build and push the docker image 
+2. Now, build and push the docker image 
 ```
 export USERNAME="alexellis"
 docker build -t $USERNAME/faas-netes:qfaas .
 docker push $USERNAME/faas-netes:qfaas
 ```
-1. Run the arkade command with new faas-netes image
+3. Run the arkade command with new faas-netes image
 ```
 arkade install openfaas \
 --set faasnetes.image=$USERNAME/faas-netes:qfaas
