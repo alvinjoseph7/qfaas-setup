@@ -66,6 +66,13 @@ cd hello-retail
 - in the ./functions/ folder, for each protocol subdirectory(tcp, tls, quic), change the yaml file in all directories with the name 'product-purchase-goapi' <br/>
   ``` gateway: http://192.168.122.138:31112 ``` to ``` gateway: http://127.0.0.1:8080 ```
 <br/>
+
+Now, to Deploy MySQL to Kubernetes and create a MySQL user, run the ./deploy/deploy_mysql.sh file with the following commands:
+```
+cd deploy
+deploy_mysql.sh
+```
+
 Finally, run the ./deploy/deploy_functions.py file by passing the protocol you want to run for the function:
 
 ```
