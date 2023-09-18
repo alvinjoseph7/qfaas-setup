@@ -76,7 +76,6 @@ deploy_mysql.sh
 Finally, run the ./deploy/deploy_functions.py file by passing the protocol you want to run for the function:
 
 ```
-cd deploy
 python3 deploy_functions.py --protocol tcp --task deploy
 ```
 You should now be able to invoke any of the deployed function using ```faas-cli invoke <function-name>```
