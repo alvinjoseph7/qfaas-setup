@@ -58,7 +58,7 @@ cd hello-retail
   ```
   kubectl run -n openfaas-fn --restart=Never --image=mysql:5.6 mysql-client-temp -- mysql -h mysql -ppassword -e "CREATE USER ..
   ```
-  Now, to Deploy MySQL to Kubernetes and create a MySQL user, run the ./deploy/deploy_mysql.sh file with the following commands:
+  Now, to Deploy MySQL to Kubernetes and create a MySQL user
   ```
   cd deploy
   ./deploy_mysql.sh
