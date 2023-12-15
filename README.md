@@ -32,51 +32,7 @@ PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-a
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 ```
 <br/><br/>
-## Deploy Hello-Retail
-Test the hello-retail application on the original OpenFaas. [Hello Retail](https://github.com/qfaas-project/hello-retail)
 
-```
-git clone https://github.com/qfaas-project/hello-retail.git 
-cd hello-retail
-```
-<br/> **NOTE:** The repository has minor edits to be made before using it.
-- Since deployed functions need to be pulled from dockerhub, set dockerhub credentials in your system beforehand. See [Private Registries](https://docs.openfaas.com/reference/private-registries/) for more info.
-  ```
-  export DOCKER_USERNAME=<your_docker_username>
-  export DOCKER_PASSWORD=<your_docker_password>
-  export DOCKER_EMAIL=<your_docker_email>
-
-  # create the secret for dockerhub in openfaas-fn namespace
-  kubectl create secret docker-registry dockerhub \
-    -n openfaas-fn \
-    --docker-username=$DOCKER_USERNAME \
-    --docker-password=$DOCKER_PASSWORD \
-    --docker-email=$DOCKER_EMAIL
-  ```
-- at ./deploy/deploy_mysql.sh file, change the user password (pass to password). <br/>
-  ```
-  kubectl run -n openfaas-fn --restart=Never --image=mysql:5.6 mysql-client-temp -- mysql -h mysql -ppassword -e "CREATE USER ..
-  ```
-  Now, to Deploy MySQL to Kubernetes and create a MySQL user
-  ```
-  cd deploy
-  ./deploy_mysql.sh
-  ```
-
-- in the ./functions/ folder, for each protocol subdirectory(tcp, tls, quic), change the yaml file in all directories with the name 'product-purchase' <br/>
-  ``` gateway: http://192.168.122.138:31112 ``` to ``` gateway: http://127.0.0.1:8080 ```
-<br/>
-
-
-
-Finally, run the ./deploy/deploy_functions.py file by passing the protocol you want to run for the function:
-
-```
-python3 deploy_functions.py --protocol tcp --task deploy
-```
-You should now be able to invoke any of the deployed function using ```faas-cli invoke <function-name>```
-
-<br/><br/>
 ## Use Qfaas version of faas-netes
 
 ```
@@ -97,6 +53,49 @@ docker push $USERNAME/faas-netes:qfaas
 arkade install openfaas \
 --set faasnetes.image=$USERNAME/faas-netes:qfaas
 ```
+
+## Deploy Hello-Retail
+Test the hello-retail application on the original OpenFaas. [Hello Retail](https://github.com/qfaas-project/hello-retail)
+
+```
+git clone https://github.com/qfaas-project/hello-retail.git 
+cd hello-retail
+```
+<br/> **NOTE:** The repository requires minor edits to be made before usage.
+- Since deployed functions need to be pulled from dockerhub, set dockerhub credentials in your environment. See [Private Registries](https://docs.openfaas.com/reference/private-registries/) for more info.
+  ```
+  export DOCKER_USERNAME=<your_docker_username>
+  export DOCKER_PASSWORD=<your_docker_password>
+  export DOCKER_EMAIL=<your_docker_email>
+
+  # create the secret for dockerhub in openfaas-fn namespace
+  kubectl create secret docker-registry dockerhub \
+    -n openfaas-fn \
+    --docker-username=$DOCKER_USERNAME \
+    --docker-password=$DOCKER_PASSWORD \
+    --docker-email=$DOCKER_EMAIL
+  ```
+- in `deploy/deploy_mysql.sh` file, change the user password (pass to password) and run the script. <br/>
+  ```
+  kubectl run -n openfaas-fn --restart=Never --image=mysql:5.6 mysql-client-temp -- mysql -h mysql -ppassword -e "CREATE USER ..
+  ./deploy_mysql.sh
+  ```
+
+- in the `functions/` folder, for each protocol subdirectory(tcp, tls, quic), edit the YAML files in all directories to reflect the following change for Gateway <br/>
+  ``` gateway: http://192.168.122.138:31112 ``` to ``` gateway: http://127.0.0.1:8080 ```
+<br/>
+
+
+
+Finally, run the Python script (pass protocol and action as paramaters):
+
+```
+python3 deploy_functions.py --protocol tcp --task deploy
+```
+You should now be able to invoke any of the deployed function using ```faas-cli invoke <function-name>```
+
+<br/><br/>
+
   
   
   
