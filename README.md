@@ -54,6 +54,7 @@ arkade install openfaas \
 --set faasnetes.image=$USERNAME/faas-netes:qfaas
 ```
 <br/>
+
 ## Deploy Hello-Retail
 Test the hello-retail application on the original OpenFaas. [Hello Retail](https://github.com/qfaas-project/hello-retail)
 
