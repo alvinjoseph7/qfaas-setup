@@ -31,8 +31,7 @@ kubectl port-forward -n openfaas svc/gateway 8080:8080 &
 PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 ```
-<br/><br/>
-
+<br/>
 ## Use Qfaas version of faas-netes
 
 ```
@@ -53,7 +52,7 @@ docker push $USERNAME/faas-netes:qfaas
 arkade install openfaas \
 --set faasnetes.image=$USERNAME/faas-netes:qfaas
 ```
-
+<br/>
 ## Deploy Hello-Retail
 Test the hello-retail application on the original OpenFaas. [Hello Retail](https://github.com/qfaas-project/hello-retail)
 
