@@ -32,6 +32,7 @@ PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-a
 echo -n $PASSWORD | faas-cli login --username admin --password-stdin
 ```
 <br/>
+
 ## Use Qfaas version of faas-netes
 
 ```
