@@ -8,8 +8,7 @@ Networks with QUIC](http://faculty.washington.edu/wlloyd/courses/tcss562/papers/
 
 ## Cluster Setup
 
-Setup a minikube cluster using docker driver. See [OpenFaas page](https://docs.openfaas.com/deployment/kubernetes/) for other cluster options. <br/>
-``` minikube -p openfaas –nodes 2 –disk-size 12G –memory 16G ```
+See [OpenFaas page](https://docs.openfaas.com/deployment/kubernetes/) for cluster options. 
 
 <br/>
 Install OpenFaas Community Edition using arkade(recommended)
